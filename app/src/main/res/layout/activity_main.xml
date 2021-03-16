@@ -7,15 +7,38 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <EditText
+        android:layout_width="355dp"
+        android:layout_height="wrap_content"
         android:hint="Search for an Event"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:id="@+id/searchedText"
         />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:onClick="search"
+            android:src="@drawable/searchicon" />
+    </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="625dp"
         android:id="@+id/list"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomNav"
+        app:menu="@menu/bottom_nav_menu"
+        />
 
 </LinearLayout>

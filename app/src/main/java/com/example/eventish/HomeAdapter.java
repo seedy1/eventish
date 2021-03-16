@@ -69,15 +69,16 @@ public class HomeAdapter extends BaseAdapter {
 
 //        Event i = (Event) getItem(position);
 //        String i = (String) getItem(position);
+        //        Item currentItem = (Item) getItem(position);
         Event i = (Event) getItem(position);
 
 //        title.setText(urls.get(position).getName());
-        title.setText(urls.get(position).getImage());
+        title.setText(urls.get(position).getName());
         date.setText(urls.get(position).getDate());
 //        price.setText("$"+urls.get(position).getPrice());
 
         // Get a RequestQueue
-        /*
+
         RequestQueue queue = MySingleton.getInstance(context).getRequestQueue();
         Response.Listener<Bitmap> rep_listener = response -> {
             img.setImageBitmap(response);
@@ -86,10 +87,10 @@ public class HomeAdapter extends BaseAdapter {
 
         ImageRequest request = new ImageRequest(
                 // i is the URL which is a string
-                i, rep_listener, 50,
+                i.getImage(), rep_listener, 50,
                 70, ImageView.ScaleType.CENTER , Bitmap.Config.RGB_565, null);
         queue.add(request);
-*/
+
         return convertView;
     }
 }

@@ -8,6 +8,7 @@ public class Event {
     String date;
     String time;
     int price;
+    String venue;
 
     public Event(){}
 

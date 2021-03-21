@@ -2,50 +2,41 @@ package com.example.eventish;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.SimpleCursorAdapter;
 
 import com.example.eventish.Database.MyDatabase;
+import com.example.eventish.adapters.FavouriteAdapter;
+import com.example.eventish.model.Event;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class FavouriteActivity extends AppCompatActivity {
 
-    HomeAdapter adapter;
-    AsyncForCategoriesList asyList;
+    FavouriteAdapter adapter;
+    MyDatabase myDb;
     ListView list;
     BottomNavigationView bottomNav;
-
-    MyDatabase myDb;
-//    myDb = new MyDatabase(context);
-
-
-    //search
-    EditText seachField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_favourite);
 
         list =  (ListView) findViewById(R.id.list);
-        adapter = new HomeAdapter(MainActivity.this);
+        adapter = new FavouriteAdapter(FavouriteActivity.this);
 
         bottomNav = findViewById(R.id.bottomNav);
-        bottomNav.setSelectedItemId(R.id.homeNav);
+        bottomNav.setSelectedItemId(R.id.favoriteNav);
 
         // select other menus
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -60,32 +51,24 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), LocationActivity.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.favoriteNav:
-                        startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
+                    case R.id.homeNav:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.homeNav:
+                    case R.id.favoriteNav:
                         return true;
                 }
                 return false;
             }
         });
 
-        asyList = new AsyncForCategoriesList(adapter);
-        asyList.execute("https://app.ticketmaster.com/discovery/v2/events.json?locale=FR&apikey=BLBBzt3pKzrnEZWiHG0kgsVvKKwIjZ6W");
+        adapter.getAll();
         list.setAdapter(adapter);
 
     }
 
 
-    // serach
-    public void search(View view) {
-        seachField = (EditText) findViewById(R.id.searchedText);
-        Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
-        String searching = seachField.getText().toString();
-        intent.putExtra("search", searching);
-        startActivity(intent);
-//        Toast.makeText(this,"you search for "+searching, Toast.LENGTH_LONG).show();
-    }
+//    ArrayAdapter<String> adp = new ArrayAdapter<String>(this,);
+
 
 }

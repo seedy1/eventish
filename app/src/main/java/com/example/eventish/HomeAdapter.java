@@ -1,6 +1,8 @@
 package com.example.eventish;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
+import com.example.eventish.Database.MyDatabase;
 import com.example.eventish.model.Event;
 
 import java.util.Vector;
@@ -26,9 +29,29 @@ public class HomeAdapter extends BaseAdapter {
 //    Vector<String> urls = new Vector<>();
     Vector<Event> urls = new Vector<>();
     Context context;
+    MyDatabase myDb;
 
     public HomeAdapter(Context context){
         this.context = context;
+        this.myDb = new MyDatabase(context);
+    }
+
+    // insert
+    public void insertData(String name, String date, String image, String genre, String subgenre, String veune, String city){
+        Log.i("STARTINSERT", "Entered insert method");
+        SQLiteDatabase db = myDb.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(myDb.NAME, name);
+        values.put(myDb.DATE, date);
+        values.put(myDb.IMAGE, image);
+        values.put(myDb.GENRE, genre);
+        values.put(myDb.SUBGENRE, subgenre);
+        values.put(myDb.VENUE, veune);
+        values.put(myDb.CITY, city);
+
+        db.insert(myDb.DATABASE_TABLE_NAME, null, values);
+        Log.i("ENDINSERT", "Entered insert method");
+
     }
 
     public void add(Event url){
@@ -75,7 +98,6 @@ public class HomeAdapter extends BaseAdapter {
         //        Item currentItem = (Item) getItem(position);
         Event i = (Event) getItem(position);
 
-//        title.setText(urls.get(position).getName());
         title.setText(urls.get(position).getName());
         date.setText(urls.get(position).getDate());
         city.setText(urls.get(position).getCity());
@@ -86,7 +108,8 @@ public class HomeAdapter extends BaseAdapter {
         favBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, urls.get(position).getName(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, urls.get(position).getName(), Toast.LENGTH_LONG).show();
+                insertData(urls.get(position).getName(), urls.get(position).getDate(), urls.get(position).getImage(), urls.get(position).getGerne(), urls.get(position).getSubgerne(), urls.get(position).getVenue(), urls.get(position).getCity());
                 Toast.makeText(context, urls.get(position).getName()+" added to favourites.", Toast.LENGTH_LONG).show();
             }
         });

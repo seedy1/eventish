@@ -53,6 +53,10 @@ public class LocationActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.favoriteNav:
+                        startActivity(new Intent(getApplicationContext(), FavouriteActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                     case R.id.infoNav:
                         startActivity(new Intent(getApplicationContext(), InfoActivity.class));
                         overridePendingTransition(0,0);

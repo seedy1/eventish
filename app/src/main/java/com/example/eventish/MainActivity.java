@@ -5,14 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.eventish.Database.MyDatabase;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -24,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     AsyncForCategoriesList asyList;
     ListView list;
     BottomNavigationView bottomNav;
+
+    MyDatabase myDb;
+//    myDb = new MyDatabase(context);
+
 
     //search
     EditText seachField;
@@ -48,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), InfoActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.locationNav:
+                        startActivity(new Intent(getApplicationContext(), LocationActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                     case R.id.homeNav:
                         return true;
                 }
@@ -70,5 +82,18 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("search", searching);
         startActivity(intent);
 //        Toast.makeText(this,"you search for "+searching, Toast.LENGTH_LONG).show();
+    }
+
+    // insert
+    public void insertData(String name, String time){
+        Log.i("STARTINSERT", "Entered insert method");
+        SQLiteDatabase db = myDb.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(myDb.NAME, name);
+        values.put(myDb.DATE, time);
+
+        db.insert(myDb.DATABASE_TABLE_NAME, null, values);
+        Log.i("ENDINSERT", "Entered insert method");
+
     }
 }

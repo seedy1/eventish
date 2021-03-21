@@ -1,10 +1,12 @@
 package com.example.eventish;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,9 +27,9 @@ public class SearchResultActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         // showing the back button in action bar
-        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
-        onOptionsItemSelected();
+//        onOptionsItemSelected();
 
         Intent intent = getIntent();
         String s = intent.getStringExtra("search");
@@ -45,4 +47,21 @@ public class SearchResultActivity extends AppCompatActivity {
         lv.setText("Result Not Found!");
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        return super.onOptionsItemSelected(item);
+        switch(item.getItemId()){
+
+            case R.id.homeNav:
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                return true;
+        }
+
+        this.finish();
+        return true;
+    }
+
+    //    onOptionsItemSelected(MenuItem item)
+
 }

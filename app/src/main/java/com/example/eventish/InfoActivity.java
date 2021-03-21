@@ -32,6 +32,10 @@ public class InfoActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.locationNav:
+                        startActivity(new Intent(getApplicationContext(), LocationActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                 }
                 return false;
             }

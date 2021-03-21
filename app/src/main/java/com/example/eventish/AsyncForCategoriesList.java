@@ -93,19 +93,30 @@ public class AsyncForCategoriesList extends AsyncTask<String, Void, JSONObject> 
                 JSONObject event = eventsArray.getJSONObject(i);
 
                 String eventName = event.getString("name");
+                String externalLink = event.getString("url");
+
                 String eventDate = event.getJSONObject("dates").getJSONObject("start").getString("localDate");
-                String eventImage = event.getJSONArray("images").getJSONObject(0).getString("url");
+                String eventImage = event.getJSONArray("images").getJSONObject(4).getString("url");
+
+                String eventGenre = event.getJSONArray("classifications").getJSONObject(0).getJSONObject("segment").getString("name");
+                String eventSubgenre = event.getJSONArray("classifications").getJSONObject(0).getJSONObject("subGenre").getString("name");
+
+                String venueName = event.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getString("name");
+                String venueCity = event.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("city").getString("name");
+
                 Event event1 = new Event();
 
                 event1.setName(eventName);
                 event1.setDate(eventDate);
-                event1.setDescription("fyvgebinjxwqmk");
+                event1.setLink(externalLink);
                 event1.setImage(eventImage);
-                event1.setPrice(99);
-                event1.setTime("noon");
+                event1.setGerne(eventGenre);
+                event1.setSubgerne(eventSubgenre);
+                event1.setVenue(venueName);
+                event1.setCity(venueCity);
 
                 adp.add(event1); // add them to the adapter
-                Log.i("IMG", "Added to adapter img: "+eventImage);
+                Log.i("IMG", "Added to adapter venue: "+venueName);
                 adp.notifyDataSetChanged(); // notify the adapter when a new image url is added
             }
 

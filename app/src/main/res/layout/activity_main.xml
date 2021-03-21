@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:focusableInTouchMode="true"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -30,14 +31,15 @@
     </LinearLayout>
 
     <ListView
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="625dp"
-        android:id="@+id/list"/>
+        android:layout_height="630dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottomNav"
+        android:layout_marginBottom="0dp"
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_nav_menu"
 

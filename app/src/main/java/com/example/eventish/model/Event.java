@@ -3,22 +3,57 @@ package com.example.eventish.model;
 public class Event {
     String id;
     String name;
-    String description;
+    String link;
     String image;
     String date;
     String time;
     int price;
     String venue;
+    String city;
+    String gerne;
+    String subgerne;
+
+    public String getGerne() {
+        return gerne;
+    }
+
+    public void setGerne(String gerne) {
+        this.gerne = gerne;
+    }
+
+    public String getSubgerne() {
+        return subgerne;
+    }
+
+    public void setSubgerne(String subgerne) {
+        this.subgerne = subgerne;
+    }
 
     public Event(){}
 
-    public Event(String name, String description, String image, String date, String time, int price) {
+    public Event(String name, String link, String image, String date, String time, int price) {
         this.name = name;
-        this.description = description;
+        this.link = link;
         this.image = image;
         this.date = date;
         this.time = time;
         this.price = price;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getName() {
@@ -29,12 +64,12 @@ public class Event {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLink() {
+        return link;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLink(String description) {
+        this.link = description;
     }
 
     public String getImage() {

@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:id="@+id/cardView"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         android:layout_margin="16dp"
@@ -18,11 +18,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:id="@+id/cardViewImage"
-            />
+            <ImageView
+                android:id="@+id/cardViewImage"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,33 +30,77 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-            <TextView
-                android:id="@+id/cardViewTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Event title here"
-                />
+                <TextView
+                    android:id="@+id/cardViewTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Event title here"
+                    android:textSize="36sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eventDate"
+                    android:text="Some more needed text" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eventGenre"
+                    android:text="Some more needed text" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eventSubGenre"
+                    android:text="Some more needed text" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eventVenue"
+                    android:text="Some more needed text" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
                 <Button
+                    android:id="@+id/cardDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="action_share"
-                    android:id="@+id/cardDate"
+                    android:clickable="false"
+                    android:layout_marginRight="5dp"
+                    android:text="action_share" />
+
+                <Button
+                    android:id="@+id/eventCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:layout_marginRight="5dp"
+                    android:text="action_explore" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_fav_red"
+                    android:id="@+id/addToFavListBtn"
                     />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="action_explore"
-                    android:id="@+id/cardPrice"
-                     />
-
             </LinearLayout>
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

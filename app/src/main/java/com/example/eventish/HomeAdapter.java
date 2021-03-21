@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,13 +61,14 @@ public class HomeAdapter extends BaseAdapter {
         ImageView img = convertView.findViewById(R.id.cardViewImage);
         TextView title = convertView.findViewById(R.id.cardViewTitle);
         TextView date = convertView.findViewById(R.id.cardDate);
-        TextView price = convertView.findViewById(R.id.cardPrice);
+        TextView city = convertView.findViewById(R.id.eventCity);
+        TextView venue = convertView.findViewById(R.id.eventVenue);
+        TextView genre = convertView.findViewById(R.id.eventGenre);
+        TextView subGenre = convertView.findViewById(R.id.eventSubGenre);
 
-//        String eventTitle = event.getName();
-//        String eventImage = event.getImage();
-//
-//        Log.i("IMG", eventImage);
-//        Log.i("TITLE", eventTitle);
+        ImageView favBtn = convertView.findViewById(R.id.addToFavListBtn);
+
+
 
 //        Event i = (Event) getItem(position);
 //        String i = (String) getItem(position);
@@ -75,10 +78,20 @@ public class HomeAdapter extends BaseAdapter {
 //        title.setText(urls.get(position).getName());
         title.setText(urls.get(position).getName());
         date.setText(urls.get(position).getDate());
-//        price.setText("$"+urls.get(position).getPrice());
+        city.setText(urls.get(position).getCity());
+        venue.setText(urls.get(position).getVenue());
+        genre.setText(urls.get(position).getGerne());
+        subGenre.setText(urls.get(position).getSubgerne());
+
+        favBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, urls.get(position).getName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, urls.get(position).getName()+" added to favourites.", Toast.LENGTH_LONG).show();
+            }
+        });
 
         // Get a RequestQueue
-
         RequestQueue queue = MySingleton.getInstance(context).getRequestQueue();
         Response.Listener<Bitmap> rep_listener = response -> {
             img.setImageBitmap(response);

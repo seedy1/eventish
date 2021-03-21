@@ -2,25 +2,17 @@ package com.example.eventish;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.eventish.Database.MyDatabase;
+import com.example.eventish.adapters.HomeAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottomNav);
         bottomNav.setSelectedItemId(R.id.homeNav);
 
+        tabMenuSwitcher();
+
+        asyList = new AsyncForCategoriesList(adapter);
+        asyList.execute("https://app.ticketmaster.com/discovery/v2/events.json?locale=FR&apikey=BLBBzt3pKzrnEZWiHG0kgsVvKKwIjZ6W");
+        list.setAdapter(adapter);
+
+    }
+
+    void tabMenuSwitcher(){
         // select other menus
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -71,19 +72,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        asyList = new AsyncForCategoriesList(adapter);
-        asyList.execute("https://app.ticketmaster.com/discovery/v2/events.json?locale=FR&apikey=BLBBzt3pKzrnEZWiHG0kgsVvKKwIjZ6W");
-        list.setAdapter(adapter);
-
     }
 
-
-    // serach
+    // search on click listener
     public void search(View view) {
         seachField = (EditText) findViewById(R.id.searchedText);
         Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
         String searching = seachField.getText().toString();
-        intent.putExtra("search", searching);
+        intent.putExtra("search", searching); // add keyword to use in search results activity
         startActivity(intent);
 //        Toast.makeText(this,"you search for "+searching, Toast.LENGTH_LONG).show();
     }

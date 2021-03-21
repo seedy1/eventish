@@ -9,6 +9,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+// this class helps download image resources efficiently
 public class MySingleton {
 
     private static MySingleton instance;

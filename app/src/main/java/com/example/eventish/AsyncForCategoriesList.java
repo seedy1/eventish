@@ -3,8 +3,7 @@ package com.example.eventish;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
+import com.example.eventish.adapters.HomeAdapter;
 import com.example.eventish.model.Event;
 
 import org.json.JSONArray;
@@ -17,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.channels.AsynchronousChannelGroup;
 
 public class AsyncForCategoriesList extends AsyncTask<String, Void, JSONObject> {
 
@@ -38,12 +36,10 @@ public class AsyncForCategoriesList extends AsyncTask<String, Void, JSONObject> 
             HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
 
             InputStream in = new BufferedInputStream(urlConn.getInputStream());
+            // read response and return it as a JSON object
             String s = readStream(in);
 
-            // to remove jsonFlickrFeed in front of response
-//            String jsonExtract = s.substring("jsonFlickrFeed(".length(), s.length() - 1);
-            Log.i("JFL", s);
-
+//            Log.i("SJ", s);
             jsonObject = new JSONObject(s);
 
         } catch (IOException | JSONException e) {
@@ -53,6 +49,7 @@ public class AsyncForCategoriesList extends AsyncTask<String, Void, JSONObject> 
 
     }
 
+//    method to read Input Stream
     private String readStream(InputStream in) {
         try {
             ByteArrayOutputStream bo = new ByteArrayOutputStream();
@@ -66,28 +63,19 @@ public class AsyncForCategoriesList extends AsyncTask<String, Void, JSONObject> 
             return "";
         }
     }
-/*
-{
-  "_embedded": {
-    "events": [
-      {
-        "name": "Hamilton",
-        "type": "event",
-        "images": [
-          {
-            "ratio": "16_9",
-            "url": "https://s1.ticketm.net/dam/a/dd1/9273b646-953f-467e-8e79-ec6eece1edd1_1267151_RECOMENDATION_16_9.jpg",
-            "width": 100,
- */
+
+
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
         super.onPostExecute(jsonObject);
 
         try {
+
+            // start parsing the JSON Object returned
             JSONObject urls = jsonObject.getJSONObject("_embedded");
             JSONArray eventsArray = urls.getJSONArray("events");
 
-//            get all the image urls
+
             for(int i=0;i<eventsArray.length();i++){
 
                 JSONObject event = eventsArray.getJSONObject(i);
@@ -104,8 +92,8 @@ public class AsyncForCategoriesList extends AsyncTask<String, Void, JSONObject> 
                 String venueName = event.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getString("name");
                 String venueCity = event.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("city").getString("name");
 
+                // add event details to Event object
                 Event event1 = new Event();
-
                 event1.setName(eventName);
                 event1.setDate(eventDate);
                 event1.setLink(externalLink);
@@ -115,6 +103,7 @@ public class AsyncForCategoriesList extends AsyncTask<String, Void, JSONObject> 
                 event1.setVenue(venueName);
                 event1.setCity(venueCity);
 
+                // add event object to adapter
                 adp.add(event1); // add them to the adapter
                 Log.i("IMG", "Added to adapter venue: "+venueName);
                 adp.notifyDataSetChanged(); // notify the adapter when a new image url is added

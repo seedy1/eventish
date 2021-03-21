@@ -11,15 +11,27 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="About page with fragments"
-        android:textSize="30sp"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="345dp" />
+        android:layout_gravity="top|center"
+        android:gravity="top"
+        android:text="TICKETMASTER API"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:layout_width="366dp"
+        android:layout_height="601dp"
+        android:src="@drawable/tma" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="\@ Eventish 2021."
+        android:textSize="22dp"
+        android:gravity="center"
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         app:menu="@menu/bottom_nav_menu" />
 </LinearLayout>

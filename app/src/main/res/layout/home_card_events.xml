@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Event title here"
+                    android:text="Event title"
                     android:textSize="36sp"
                     android:textStyle="bold" />
 
@@ -43,30 +43,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/eventDate"
-                    android:text="Some more needed text" />
+                    <TextView
+                        android:id="@+id/eventVenue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Event Venue"
+                        android:textSize="18sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/eventGenre"
-                    android:text="Some more needed text" />
+                    <TextView
+                        android:id="@+id/eventCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Event City"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/cardDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/eventSubGenre"
-                    android:text="Some more needed text" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/eventVenue"
-                    android:text="Some more needed text" />
+                    android:text="Event Date"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -77,20 +74,20 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/cardDate"
+                    android:id="@+id/eventSubGenre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:layout_marginRight="5dp"
-                    android:text="action_share" />
+                    android:text="Sub Genre" />
 
                 <Button
-                    android:id="@+id/eventCity"
+                    android:id="@+id/eventGenre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:layout_marginRight="5dp"
-                    android:text="action_explore" />
+                    android:text="Genre" />
 
                 <ImageButton
                     android:layout_width="wrap_content"

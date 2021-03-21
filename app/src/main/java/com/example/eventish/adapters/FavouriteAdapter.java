@@ -38,12 +38,12 @@ public class FavouriteAdapter extends BaseAdapter {
     }
 
 
+    // get list of all events store in the db
     public List<Event> getAll(){
         Log.i("LIST", "entered get all");
-        SQLiteDatabase db = myDb.getWritableDatabase();
+        SQLiteDatabase db = myDb.getWritableDatabase(); // db helper method
         Cursor cursor = db.rawQuery("select * from " + myDb.DATABASE_TABLE_NAME, null);
 
-//        favs = new ArrayList<>();
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
                 Event event = new Event();
@@ -95,12 +95,14 @@ public class FavouriteAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        // declare a recycle view
         RecyclerView.ViewHolder holder;
 //        getAll();
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.home_card_events, null);
         }
 
+        // get event position and cast to event
         Event i = (Event) getItem(position);
 //        Event event = new Event();
 
@@ -113,12 +115,14 @@ public class FavouriteAdapter extends BaseAdapter {
         TextView subGenre = convertView.findViewById(R.id.eventSubGenre);
 
         ImageView favBtn = convertView.findViewById(R.id.addToFavListBtn);
+
+        // disable button so you cannot add duplicates
         favBtn.setEnabled(false);
 
         title.setText(favs.get(position).getName());
-        date.setText(favs.get(position).getDate());
+        date.setText("Date: "+favs.get(position).getDate());
         city.setText(favs.get(position).getCity());
-        venue.setText(favs.get(position).getVenue());
+        venue.setText(favs.get(position).getVenue()+", ");
         genre.setText(favs.get(position).getGerne());
         subGenre.setText(favs.get(position).getSubgerne());
 

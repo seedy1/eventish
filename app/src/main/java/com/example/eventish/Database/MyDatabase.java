@@ -30,6 +30,8 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // create database table
+
         String DATABASE_TABLE_CREATE = "CREATE TABLE "+DATABASE_TABLE_NAME+" ("+
                 PKEY+" INTEGER PRIMARY KEY,"+NAME+" TEXT,"+DATE+" TEXT,"+IMAGE+" TEXT,"+GENRE+" TEXT,"+SUBGENRE+" TEXT, "+VENUE+" TEXT,"+CITY+" TEXT);";
         db.execSQL(DATABASE_TABLE_CREATE);

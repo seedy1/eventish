@@ -1,4 +1,4 @@
-package com.example.eventish;
+package com.example.eventish.adapters;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -20,13 +20,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.example.eventish.Database.MyDatabase;
+import com.example.eventish.MySingleton;
+import com.example.eventish.R;
 import com.example.eventish.model.Event;
 
 import java.util.Vector;
 
 public class HomeAdapter extends BaseAdapter {
 
-//    Vector<String> urls = new Vector<>();
     Vector<Event> urls = new Vector<>();
     Context context;
     MyDatabase myDb;
@@ -36,11 +37,13 @@ public class HomeAdapter extends BaseAdapter {
         this.myDb = new MyDatabase(context);
     }
 
-    // insert
+    // insert record into database
     public void insertData(String name, String date, String image, String genre, String subgenre, String veune, String city){
         Log.i("STARTINSERT", "Entered insert method");
         SQLiteDatabase db = myDb.getWritableDatabase();
         ContentValues values = new ContentValues();
+
+        // db columns
         values.put(myDb.NAME, name);
         values.put(myDb.DATE, date);
         values.put(myDb.IMAGE, image);
@@ -50,10 +53,11 @@ public class HomeAdapter extends BaseAdapter {
         values.put(myDb.CITY, city);
 
         db.insert(myDb.DATABASE_TABLE_NAME, null, values);
-        Log.i("ENDINSERT", "Entered insert method");
+        Log.i("ENDINSERT", "Exited insert method");
 
     }
 
+    // add event from API call results
     public void add(Event url){
         urls.add(url);
     }
@@ -92,19 +96,19 @@ public class HomeAdapter extends BaseAdapter {
         ImageView favBtn = convertView.findViewById(R.id.addToFavListBtn);
 
 
-
 //        Event i = (Event) getItem(position);
 //        String i = (String) getItem(position);
         //        Item currentItem = (Item) getItem(position);
         Event i = (Event) getItem(position);
 
         title.setText(urls.get(position).getName());
-        date.setText(urls.get(position).getDate());
+        date.setText("Date: "+urls.get(position).getDate());
         city.setText(urls.get(position).getCity());
-        venue.setText(urls.get(position).getVenue());
+        venue.setText(urls.get(position).getVenue()+", ");
         genre.setText(urls.get(position).getGerne());
         subGenre.setText(urls.get(position).getSubgerne());
 
+        // listener for when the add to Fav button is clicked
         favBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

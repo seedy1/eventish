@@ -38,6 +38,15 @@ public class FavouriteActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottomNav);
         bottomNav.setSelectedItemId(R.id.favoriteNav);
 
+        tabMenuSwitcher();
+
+        adapter.getAll();
+        list.setAdapter(adapter);
+
+    }
+
+    void tabMenuSwitcher(){
+
         // select other menus
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -62,11 +71,8 @@ public class FavouriteActivity extends AppCompatActivity {
             }
         });
 
-        adapter.getAll();
-        list.setAdapter(adapter);
 
     }
-
 
 //    ArrayAdapter<String> adp = new ArrayAdapter<String>(this,);
 

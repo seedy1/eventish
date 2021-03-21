@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.eventish.adapters.HomeAdapter;
+
 public class SearchResultActivity extends AppCompatActivity {
 
     HomeAdapter adapter;
@@ -51,8 +53,9 @@ public class SearchResultActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 //        return super.onOptionsItemSelected(item);
-        switch(item.getItemId()){
 
+        // back button code
+        switch(item.getItemId()){
             case R.id.homeNav:
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 return true;
@@ -62,6 +65,5 @@ public class SearchResultActivity extends AppCompatActivity {
         return true;
     }
 
-    //    onOptionsItemSelected(MenuItem item)
 
 }
